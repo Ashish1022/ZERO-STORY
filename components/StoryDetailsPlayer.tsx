@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Button } from './ui/button';
 import LoaderSpinner from './LoaderSpinner';
 import { useRouter } from 'next/navigation';
-import { useMutation } from 'convex/react';
+import { useAction, useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useToast } from './ui/use-toast';
 import { useAudio } from '@/providers/AudioProvider';
@@ -28,7 +28,7 @@ const StoryDetailsPlayer = (props: StoryDetailsPlayerProps) => {
   const deleteStory = useMutation(api.stories.deleteStory)
   const router = useRouter();
   const { toast } = useToast();
-  const {setAudio} = useAudio();
+  const { setAudio } = useAudio();
 
   const handleDelete = async () => {
     try {
@@ -46,15 +46,23 @@ const StoryDetailsPlayer = (props: StoryDetailsPlayerProps) => {
     }
   }
 
+  const upgrade = useAction(api.stripe.pay);
+
+  const handleUpgrade = async () => {
+    const url = await upgrade({});
+    if (!url) return;
+    router.push(url)
+  }
+
   const handlePlay = () => {
     setAudio({
-      title:props.storyTitle,
-      audioUrl:props.audioUrl,
-      imageUrl:props.imageUrl,
-      author:props.storyAuthor,
-      storyId:props.storyId
+      title: props.storyTitle,
+      audioUrl: props.audioUrl,
+      imageUrl: props.imageUrl,
+      author: props.storyAuthor,
+      storyId: props.storyId
     })
-  } 
+  }
   console.log(handlePlay)
   if (!props.imageUrl || !props.storyAuthorImageUrl) return <LoaderSpinner />;
 
