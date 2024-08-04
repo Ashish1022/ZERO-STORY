@@ -17,6 +17,7 @@ import type {
 import type * as files from "../files.js";
 import type * as http from "../http.js";
 import type * as stories from "../stories.js";
+import type * as stripe from "../stripe.js";
 import type * as tasks from "../tasks.js";
 import type * as users from "../users.js";
 
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   files: typeof files;
   http: typeof http;
   stories: typeof stories;
+  stripe: typeof stripe;
   tasks: typeof tasks;
   users: typeof users;
 }>;

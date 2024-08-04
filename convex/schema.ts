@@ -31,6 +31,9 @@ export default defineSchema({
         imageUrl: v.string(),
         clerkId: v.string(),
         name: v.string(),
-
+        endsOn: v.optional(v.number()),
+        subscriptionId: v.optional(v.string()),
     })
+    .searchIndex('search_clerkId', { searchField: 'clerkId' })
+    .searchIndex('search_subscriptionId', { searchField: 'subscriptionId' })
 })

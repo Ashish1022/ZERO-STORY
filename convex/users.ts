@@ -7,8 +7,7 @@ export const createUser = internalMutation({
         email: v.string(),
         imageUrl: v.string(),
         clerkId: v.string(),
-        name: v.string(),
-
+        name: v.string()
     },
     handler: async (ctx, args) => {
         await ctx.db.insert("users", {
@@ -16,7 +15,6 @@ export const createUser = internalMutation({
             imageUrl: args.imageUrl,
             clerkId: args.clerkId,
             name: args.name,
-
         });
     },
 });
@@ -97,6 +95,68 @@ export const getUserById = query({
             throw new ConvexError("User not found");
         }
 
+
         return user;
+    },
+});
+
+
+export const currentUser = query({
+    args: {},
+    handler: async (ctx) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new ConvexError("User not authenticated")
+        }
+
+        const user = await ctx.db
+            .query("users")
+            .filter((q) => q.eq(q.field("email"), identity.email))
+            .unique();
+
+
+        if (!user) {
+            throw new ConvexError("User not found");
+        }
+
+        return user;
+    }
+});
+
+export const UpdateSubscription = internalMutation({
+    args: { subscriptionId: v.string(), userId: v.id("users"), endsOn: v.number() },
+    handler: async (ctx, { subscriptionId, userId, endsOn }) => {
+       
+        if(!userId){
+            throw new Error("user not found")
+        }
+        await ctx.db.patch(userId, {
+            subscriptionId: subscriptionId,
+            endsOn: endsOn
+        });
+    },
+});
+
+export const UpdateSubscriptionById = internalMutation({
+    args: { subscriptionId: v.string(), endsOn: v.number() },
+    handler: async (ctx, { subscriptionId, endsOn }) => {
+
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) {
+            throw new ConvexError("User not authenticated")
+        }
+        const user = await ctx.db.query("users")
+            .filter((q)=>q.eq(q.field("email"), identity.email))
+            .unique();
+
+        if (!user) {
+            throw new Error("User not found!");
+        }
+
+        await ctx.db.patch(user._id, {
+            endsOn: endsOn
+        });
     },
 });
