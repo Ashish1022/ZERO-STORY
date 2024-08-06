@@ -33,7 +33,7 @@ const page = ({ params }: { params: { profileId: string } }) => {
       <section className="mt-9 flex flex-col gap-5 mb-6">
         <h1 className="text-20 font-bold text-white-1">All Stories</h1>
         {storyData && storyData.stories.length > 0 ? (
-          <div className="podcast_grid">
+          <div className="story_grid">
             {storyData?.stories?.slice(0, 4).map((story) => (
               <StoryCard
                 key={story._id}

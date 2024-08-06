@@ -56,7 +56,7 @@ const StoryDetails = ({ params: { storyId, authorId } }: { params: { storyId: Id
       <section className='mt-8 flex flex-col gap-5'>
         <h1 className='text-20 font-bold text-white-1'>Similar stories</h1>
         {similarStories && similarStories.length > 0 ? (
-          <div className='podcast_grid'>
+          <div className='story_grid'>
             {similarStories?.map(({ _id, storyDescription, storyTitle, imageUrl }) => (
               <StoryCard
                 key={_id}

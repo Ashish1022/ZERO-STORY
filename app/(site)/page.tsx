@@ -2,7 +2,7 @@
 
 import LoaderSpinner from '@/components/LoaderSpinner';
 import StoryCard from '@/components/StoryCard';
-import { podcastData } from '@/constants';
+
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
 import { formatTime } from '@/lib/formatTime';
@@ -28,7 +28,7 @@ const page = ({params:{storyId}}:{params:{storyId:Id<"stories">}}) => {
     <div className="mt-8 flex flex-col gap-8 md:overflow-hidden">
       <section className='flex flex-col gap-4'>
         <h1 className="text-20 font-bold text-white-1">Trending Stories</h1>
-        <div className='podcast_grid'>
+        <div className='story_grid'>
           {trendigstories.slice(0, 4).map(({ _id, storyTitle, storyDescription, imageUrl }) => (
             <StoryCard storyId={_id} title={storyTitle} description={storyDescription} imgURL={imageUrl} key={_id} />
           ))}
@@ -64,7 +64,7 @@ const page = ({params:{storyId}}:{params:{storyId:Id<"stories">}}) => {
       </section>
       <section className='flex flex-col gap-6 mt-6 mb-2'>
         <h1 className='text-20 font-bold text-white-1'>Popular stories</h1>
-        <div className='podcast_grid'>
+        <div className='story_grid'>
           {trendigstories.slice(0, 4).map(({ _id, storyTitle, storyDescription, imageUrl }) => (
             <StoryCard storyId={_id} title={storyTitle} description={storyDescription} imgURL={imageUrl} key={_id} />
           ))}

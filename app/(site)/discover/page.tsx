@@ -22,7 +22,7 @@ const Discover = ({ searchParams: { search} }: { searchParams : { search: string
         {storyData ? (
           <>
             {storyData.length > 0 ? (
-              <div className="podcast_grid">
+              <div className="story_grid">
               {storyData?.map(({ _id, storyTitle, storyDescription, imageUrl }) => (
                 <StoryCard 
                   key={_id}
