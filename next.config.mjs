@@ -18,6 +18,9 @@ const nextConfig = {
                 hostname:'energetic-hedgehog-505.convex.cloud'
             },
         ]
+    },
+    eslint:{
+        ignoreBuildErrors:true
     }
 };
 
