@@ -15,7 +15,7 @@ const EmptyState = ({title, buttonLink, buttonText, search}:{title: string; butt
             {buttonLink && (
                 <Button className='bg-orange-1'>
                     <Link href={buttonLink} className='gap-1 flex'>
-                        <Image src='/icons/Discover.svg' alt='discover' width={20} height={20}/>
+                        <Image src='/icons/discover.svg' alt='discover' width={20} height={20}/>
                         <h1 className='text-16 font-extrabold text-white-1'>{buttonText}</h1>
                     </Link>
                 </Button>
