@@ -24,7 +24,7 @@ const LeftSidebar = () => {
         })}>
             <nav className='flex flex-col gap-6'>
                 <Link href='/' className='flex cursor-pointer items-center pl-9 gap-1 pb-4 max-lg:justify-center'>
-                    <h1 className='text-20 font-extrabold max-lg:hidden'>ZERO | STORY</h1>
+                    <h1 className='text-24 font-extrabold max-lg:hidden'>ZERO | STORY</h1>
                 </Link>
                 {sidebarLinks.map(({ label, imgURL, route }) => {
 

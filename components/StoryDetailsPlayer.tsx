@@ -63,7 +63,7 @@ const StoryDetailsPlayer = (props: StoryDetailsPlayerProps) => {
       storyId: props.storyId
     })
   }
-  console.log(handlePlay)
+
   if (!props.imageUrl || !props.storyAuthorImageUrl) return <LoaderSpinner />;
 
   return (

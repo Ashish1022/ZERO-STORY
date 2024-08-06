@@ -8,7 +8,7 @@ const EmptyState = ({title, buttonLink, buttonText, search}:{title: string; butt
     <section className='flex-center gap-3 size-full flex-col'>
         <Image src='/icons/emptyState.svg' alt='emptystate' width={250} height={250}/>
         <div className='flex-center w-full max-w-[254px] flex-col gap-3'>
-            <h1 className='text-16 text-center font-medium text-white-1'>{title}</h1>
+            <h1 className='text-16 text-center font-extrabold text-white-1'>{title}</h1>
             {search && (
                 <p className='text-16 font-medium text-center text-white-2'>Try adjusting your search to what you are looking for</p>
             )}

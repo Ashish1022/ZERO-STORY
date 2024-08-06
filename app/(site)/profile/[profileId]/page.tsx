@@ -9,13 +9,17 @@ import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useQuery } from 'convex/react'
 import React from 'react'
+import { useUser } from '@clerk/nextjs'
 
 const page = ({ params }: { params: { profileId: string } }) => {
 
   const storyData = useQuery(api.stories.getStoryByAuthorIdForProfilePage, { authorId: params.profileId })
-  const user = useQuery(api.users.getUserById, {
+  const userById = useQuery(api.users.getUserById, {
     clerkId: params.profileId
   })
+
+  const { user } = useUser();
+
   if (!user || !storyData) return <LoaderSpinner />;
   return (
     <section className="mt-8 flex flex-col">
@@ -23,8 +27,8 @@ const page = ({ params }: { params: { profileId: string } }) => {
       <div className="mt-6 flex flex-col gap-6 max-md:items-center md:flex-row">
         <ProfileCard
           storyData={storyData!}
-          imageUrl={user?.imageUrl!}
-          userFirstName={user?.name!} />
+          imageUrl={userById?.imageUrl!}
+          userFirstName={userById?.name!} />
       </div>
       <section className="mt-9 flex flex-col gap-5 mb-6">
         <h1 className="text-20 font-bold text-white-1">All Stories</h1>
@@ -40,11 +44,15 @@ const page = ({ params }: { params: { profileId: string } }) => {
               />
             ))}
           </div>
-        ) : (
+        ) : user.id === params.profileId ? (
           <EmptyState
             title="You have not created any stories yet"
             buttonLink="/create-story"
             buttonText="Create Story"
+          />
+        ) : (
+          <EmptyState
+            title={`No stories by ${userById?.name}`}
           />
         )}
       </section>
